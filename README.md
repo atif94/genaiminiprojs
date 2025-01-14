@@ -1,1 +1,3 @@
 # genaiminiprojs
+Things you need to make this project work is a grok api key , you can just visit grok.com register there and get an APIkey
+This  repository will moslty focus on GenAI applications with vector database such as chromadb the intial commit has a cold email generator which access the chromadb through pandas then parse a joblink through langchain community's webloader(scraps the website) package and later fit into llm(i  have used mistral) and a prompy has given to look into db with appropriate skills and their portfolio link side wise ,llm fits the csv file , takes job requirement through webloader and generate an cold email 
