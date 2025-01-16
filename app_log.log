@@ -1,0 +1,6 @@
+2025-01-14 22:28:19,281 - INFO - Starting analysis.
+2025-01-14 22:28:19,285 - INFO - Fetching news for AAPL from 2025-01-07 to 2025-01-14.
+2025-01-14 22:28:19,643 - INFO - Loading smaller models locally.
+2025-01-14 22:33:38,550 - INFO - Starting article summarization in batches.
+2025-01-14 22:35:15,383 - INFO - Performing sentiment analysis in parallel.
+2025-01-14 22:35:19,598 - INFO - Plotting sentiment trends.
