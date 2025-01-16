@@ -8,7 +8,7 @@ def add_documents_safely():
     # Delete collection if it exists to start fresh
     try:
         client.delete_collection("my_collection")
-        time.sleep(1)  # Give some time for deletion to complete
+        time.sleep(1.5)  # Give some time for deletion to complete
     except:
         pass
     
