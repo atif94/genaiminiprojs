@@ -1,0 +1,14 @@
+chromadb
+langchain
+langchain-groq
+langchain_community
+langchain_core
+python-dotenv
+pandas
+streamlit
+transformers
+torch
+matplotlib
+yfinance
+alpha-vantage
+TA-Lib
