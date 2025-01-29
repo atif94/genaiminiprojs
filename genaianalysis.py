@@ -80,26 +80,31 @@ class DataFetcher:
             return {}
 
     def fetch_recent_headlines(self, symbol: str, days: int = 7) -> List[str]:
-        headlines = []
+     headlines = []
+    
+     try:
+        # Fetch from Yahoo Finance
+        stock = yf.Ticker(symbol)
+        news = stock.news
+        if news:
+            for item in news[:10]:
+                if isinstance(item, dict) and 'title' in item:
+                    headlines.append(item['title'])
         
-        try:
-            # Fetch from Yahoo Finance
-            stock = yf.Ticker(symbol)
-            news = stock.news
-            if news:
-                headlines.extend([item['title'] for item in news[:10]])
-            
-            return headlines[:10]
-            
-        except Exception as e:
-            print(f"Error fetching news headlines: {str(e)}")
-            return []
+        if not headlines:
+            headlines = [f"No recent news available for {symbol}"]
+        
+        return headlines[:10]
+        
+     except Exception as e:
+        print(f"Error fetching news headlines: {str(e)}")
+        return [f"Unable to fetch news for {symbol}"] 
 
 class GenAIStockAnalyzer:
     def __init__(self, huggingface_token):
         """Initialize the GenAI analyzer with both LLM and sentiment analysis"""
         # Initialize main LLM for analysis
-        self.llm = HuggingFaceHub(
+        """self.llm = HuggingFaceHub(
             repo_id="mistralai/Mistral-7B-Instruct-v0.2",
             huggingfacehub_api_token=huggingface_token,
             model_kwargs={
@@ -108,7 +113,17 @@ class GenAIStockAnalyzer:
                 "top_p": 0.95
             }
         )
-        
+        """
+        self.llm = HuggingFaceHub(
+        repo_id="deepseek-ai/deepseek-coder-1.3b-instruct",
+        huggingfacehub_api_token=huggingface_token,
+        model_kwargs={
+            "temperature": 0.1,
+            "max_new_tokens": 500,
+            "top_p": 0.95,
+            "do_sample": True
+        }
+    )
         # Initialize sentiment analyzer
         self.sentiment_analyzer = pipeline(
             "sentiment-analysis",
